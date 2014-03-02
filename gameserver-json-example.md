@@ -78,7 +78,7 @@ A started server:
 
 ### `PATCH /servers/1338` with body `name=My%20New%20Gameserver`
 
-Responds with status code 200, if it worked.
+Responds with status code 204 NO CONTENT, if it worked.
 
 ### `POST /started-servers?id=1338`
 
@@ -161,7 +161,7 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 
 If the `server` object contains a self link + etag, make a conditional PATCH request with body `name=My%20New%20Server`.
 
-The response has a 200 status code.
+The response has a 204 NO CONTENT status code.
 
 Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
 
@@ -175,7 +175,7 @@ retrieve the link for the server:
 3. GET first link: `http://example.org/rels/server`
 4. PATCH link: `self` with body: `name=My%20New%20Server`
 
-The response has a 200 status code.
+The response has a 204 NO CONTENT status code.
 
 Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
 
