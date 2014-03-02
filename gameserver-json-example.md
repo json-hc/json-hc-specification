@@ -38,7 +38,7 @@ OR expanded:
         "self_link": "http://example.org/servers/1338",
         "name": "My Gameserver",
         "is_running": true,
-				"http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
+        "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
       }
    ]
 }
@@ -51,7 +51,7 @@ OR expanded:
   "self_link": "http://example.org/servers/1338",
   "name": "My Gameserver",
   "is_running": false,
-	"http://example.org/rels/start": "http://example.org/started-servers?id=1338"
+  "http://example.org/rels/start": "http://example.org/started-servers?id=1338"
 }
 ```
 
