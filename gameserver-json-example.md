@@ -3,6 +3,8 @@
 * Author: [DracoBlue](http://dracoblue.net)
 * Status: I am working on this. No final version, yet!
 
+This is an example for [minimalistic-json-media-type.md](./minimalistic-json-media-type.md).
+
 Let's say we own a game hosting service, and want to start, stop, backup game servers. Additionally it should be possible to set server password and public/private state of the server.
 
 ## Server
