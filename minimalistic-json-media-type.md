@@ -7,7 +7,7 @@
 
 This media type is an effort to write a json media type ([RMM Level 3](http://martinfowler.com/articles/richardsonMaturityModel.html) with [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS)), which is easy to implement if you OWN the server and the client (sdk)!
 
-To understand the idea, please see the example for controlling gameservers in [minimalistic-json-media-type-example.md], before you read the other sections!
+To understand the idea, please see the example for controlling gameservers in [minimalistic-json-media-type-example.md](minimalistic-json-media-type-example.md), before you read the other sections!
 
 ## Why yet another media type?
 
