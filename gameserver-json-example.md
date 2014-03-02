@@ -3,8 +3,14 @@
 * Author: [DracoBlue](http://dracoblue.net)
 * Status: I am working on this. No final version, yet!
 
-Let's say we own a game hosting service, and want to start, stop, backup game servers. Additionally it should be possible to set server password and public/private state of the server.
+Let's say we own a game hosting service, and want to start, stop, backup game servers. Additionally it should be possible to set server name of the server.
 
+## Client GUI Use-Cases
+
+* Show a list of servers (with pagination)
+* Stop or Start servers (Show the button, depending on the state of the server)
+* Change the name of a server
+ 
 ## Server
 
 ### `GET /`
