@@ -46,6 +46,8 @@ OR expanded:
 
 ### `GET /servers/1338`
 
+A stopped server:
+
 ``` json
 {
   "self_link": "http://example.org/servers/1338",
@@ -54,6 +56,21 @@ OR expanded:
   "http://example.org/rels/start": "http://example.org/started-servers?id=1338"
 }
 ```
+
+A started server:
+
+``` json
+{
+  "self_link": "http://example.org/servers/1338",
+  "name": "My Gameserver",
+  "is_running": true,
+  "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
+}
+```
+
+### `PATCH /servers/1338` with body `name=My%20New%20Gameserver`
+
+Responds with status code 200, if it worked.
 
 ### `POST /started-servers?id=1338`
 
@@ -129,3 +146,28 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 If there is no `http://example.org/rels/stop` link, throw an exception, which states that the server is already stopped.
 
 The response is a 201 redirect to a log entry and will be returned as LogEntry.
+
+### `setServerName(server, new_name): Server`
+
+#### self link in the server object
+
+If the `server` object contains a self link + etag, make a conditional PATCH request with body `name=My%20New%20Server`.
+
+The response has a 200 status code.
+
+Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
+
+### no self link in the server object
+
+If the `server` object does not contain a self link
+retrieve the link for the server:
+
+1. GET `/`
+2. GET link: `http://example.org/rels/servers` with GET parameter `id=1338` (if `server.id` is 1338).
+3. GET first link: `http://example.org/rels/server`
+4. PATCH link: `self` with body: `name=My%20New%20Server`
+
+The response has a 200 status code.
+
+Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
+
