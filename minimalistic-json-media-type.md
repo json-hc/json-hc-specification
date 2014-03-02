@@ -84,6 +84,7 @@ Otherwise (with 400 status code):
 
 #### `GET /servers/1338/log/1573923`
 
+``` json
 {
   "self_link": "http://example.org/servers/1338/log/1573923",
   "message": "Server started",
