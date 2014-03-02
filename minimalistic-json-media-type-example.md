@@ -5,9 +5,9 @@
 
 Let's say we own a game hosting service, and want to start, stop, backup game servers. Additionally it should be possible to set server password and public/private state of the server.
 
-### Server
+## Server
 
-#### `GET /`
+### `GET /`
 
 ``` json
 {
@@ -15,7 +15,7 @@ Let's say we own a game hosting service, and want to start, stop, backup game se
 }
 ```
 
-#### `GET /servers`
+### `GET /servers`
 
 Not expanded:
 
@@ -44,7 +44,7 @@ OR expanded:
 }
 ```
 
-#### `GET /servers/1338`
+### `GET /servers/1338`
 
 ``` json
 {
@@ -55,7 +55,7 @@ OR expanded:
 }
 ```
 
-#### `POST /started-servers?id=1338`
+### `POST /started-servers?id=1338`
 
 Does reply with headers:
 
@@ -74,7 +74,7 @@ Otherwise (with 400 status code):
 }
 ```
 
-#### `GET /servers/1338/log/1573923`
+### `GET /servers/1338/log/1573923`
 
 ``` json
 {
@@ -84,9 +84,9 @@ Otherwise (with 400 status code):
 }
 ```
 
-### Client (SDK) Use-Cases
+## Client (SDK) Use-Cases
 
-#### `getServers(): Server[]`
+### `getServers(): Server[]`
 
 1. GET `/`
 2. GET link: `http://example.org/rels/servers`
