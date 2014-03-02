@@ -165,7 +165,7 @@ The response has a 200 status code.
 
 Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
 
-### no self link in the server object
+#### no self link in the server object
 
 If the `server` object does not contain a self link
 retrieve the link for the server:
