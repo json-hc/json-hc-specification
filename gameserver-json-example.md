@@ -3,7 +3,7 @@
 * Author: [DracoBlue](http://dracoblue.net)
 * Status: I am working on this. No final version, yet!
 
-Let's say we own a game hosting service, and want to start, stop, backup game servers. Additionally it should be possible to set server name of the server.
+Let's say we own a game hosting service, and want to start and stop game servers. Additionally it should be possible to set server name of the server.
 
 ## Client GUI Use-Cases
 
