@@ -26,9 +26,9 @@ My general assumptions are:
 From ReST we take this:
 
 * No hardcoded links in client software: We shall be able to change the host for the avatar image, so client's should not construct the avatar image url by string concatination
-  * See section: Links are json properties uris on their own or suffixed with `_url`
+  * See section: Links are json properties uris on their own or suffixed with `_link`
 
-### Links are json properties uris on their own or suffixed with `_url`
+### Links are json properties uris on their own or suffixed with `_link`
 
 What happens if you step one big step away from the most current hypermedia specs (like HAL+CollectionJSON): why an extra object for links?
 
@@ -50,9 +50,9 @@ would be written as this:
 ``` json
 {
   "id": 1338,
-  "self_url": "http://example.org/articles/1338",
-  "publish_url": "http://example.org/published-articles?id=1338",
-  "avatar_url": "http//cdn.example.org/23051985.png"
+  "self_link": "http://example.org/articles/1338",
+  "publish_link": "http://example.org/published-articles?id=1338",
+  "avatar_link": "http//cdn.example.org/23051985.png"
 }
 ```
 
@@ -61,7 +61,7 @@ or as this:
 ``` json
 {
   "id": 1338,
-  "self_url": "http://example.org/articles/1338",
+  "self_link": "http://example.org/articles/1338",
   "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
   "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
 }
