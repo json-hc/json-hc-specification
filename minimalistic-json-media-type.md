@@ -41,7 +41,7 @@ What if this HAL document:
     "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
     "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
   },
-  "id": 1338,
+  "id": 1338
 }
 ```
 
@@ -70,3 +70,89 @@ or as this:
 So one cool thing what is cool about ReST and hypermedia stays in tact: no hard coded urls in the client.
 
 You cannot set a `title` or `type` for the `rel` anymore, but nothing else is lost. If we control the client sdk, this might not be necessary.
+
+### If a link may appear multiple times, it is always an array
+
+The HAL document:
+
+``` json
+{
+  "_links": {
+    "self": "http://example.org/latest-articles",
+    "http://example.org/rels/article": [
+      "http://example.org/articles/1338",
+      "http://example.org/articles/1336",
+      "http://example.org/articles/1333"
+    ]
+  }
+}
+```
+
+would be written as this:
+
+``` json
+{
+  "self_link": "http://example.org/latest-articles",
+  "http://example.org/rels/article": [
+    "http://example.org/articles/1338",
+    "http://example.org/articles/1336",
+    "http://example.org/articles/1333"
+  ]
+}
+```
+
+So if we have no articles:
+
+``` json
+{
+  "self_link": "http://example.org/latest-articles",
+  "http://example.org/rels/article": []
+}
+```
+
+### Embedded resources are links, which are resolved
+
+If we want to embed a ressource in HAL, we have to do it in this way:
+
+``` json
+{
+  "_links": {
+    "self": "http://example.org/latest-articles",
+    "http://example.org/rels/article": [
+      "http://example.org/articles/1338",
+      "http://example.org/articles/1336",
+      "http://example.org/articles/1333"
+    ]
+  },
+  "_embedded": {
+    "http://example.org/rels/article": [
+      {
+        "_links": {
+          "self": "http://example.org/articles/1338",
+          "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
+          "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
+        },
+        "id": 1338
+      }
+    ]
+  }
+}
+```
+
+But with this media type, a link can be included by including the response:
+
+``` json
+{
+  "self_link": "http://example.org/latest-articles",
+  "http://example.org/rels/article": [
+    {
+      "id": 1338,
+      "self_link": "http://example.org/articles/1338",
+      "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
+      "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
+    },
+    "http://example.org/articles/1336",
+    "http://example.org/articles/1333"
+  ]
+}
+```
