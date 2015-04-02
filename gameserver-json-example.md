@@ -76,7 +76,15 @@ A started server:
 }
 ```
 
-### `PATCH /servers/1338` with body `name=My%20New%20Gameserver`
+### `PATCH /servers/1338` to set a new name
+
+``` json
+[
+    { "op": "replace", "path": "/name", "value": "My New Gameserver" }
+]
+``` 
+
+If you expect to PATCH with body `name=My%20New%20Gameserver`, this is *wrong* - see [william durands post on this matter](http://williamdurand.fr/2014/02/14/please-do-not-patch-like-an-idiot/).
 
 Responds with status code 204 NO CONTENT, if it worked.
 
@@ -159,7 +167,13 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 
 #### self link in the server object
 
-If the `server` object contains a `http://json-hc.org/rels/self` link + etag, make a conditional PATCH request with body `name=My%20New%20Server`.
+If the `server` object contains a `http://json-hc.org/rels/self` link + etag, make a conditional PATCH request with body:
+
+``` json
+[
+    { "op": "replace", "path": "/name", "value": "My New Gameserver" }
+]
+``` 
 
 The response has a 204 NO CONTENT status code.
 
@@ -173,7 +187,14 @@ retrieve the link for the server:
 1. GET `/`
 2. GET link: `http://example.org/rels/servers` with GET parameter `id=1338` (if `server.id` is 1338).
 3. GET first link: `http://example.org/rels/server`
-4. PATCH link: `http://json-hc.org/rels/self` with body: `name=My%20New%20Server`
+4. PATCH link: `http://json-hc.org/rels/self` with body:
+
+``` json
+[
+    { "op": "replace", "path": "/name", "value": "My New Gameserver" }
+]
+``` 
+
 
 The response has a 204 NO CONTENT status code.
 
