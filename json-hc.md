@@ -1,4 +1,6 @@
-# Minimalistic Json Media Type
+# JSON-HC
+
+A minimalistic JSON media type, which enables hypermedia controls in JSON.
 
 * Author: [DracoBlue](http://dracoblue.net)
 * Status: I am working on this. No final version, yet!
