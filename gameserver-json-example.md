@@ -159,7 +159,7 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 
 #### self link in the server object
 
-If the `server` object contains a self link + etag, make a conditional PATCH request with body `name=My%20New%20Server`.
+If the `server` object contains a `http://json-hc.org/rels/self` link + etag, make a conditional PATCH request with body `name=My%20New%20Server`.
 
 The response has a 204 NO CONTENT status code.
 
@@ -167,7 +167,7 @@ Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.
 
 #### no self link in the server object
 
-If the `server` object does not contain a self link
+If the `server` object does not contain a `http://json-hc.org/rels/self` link
 retrieve the link for the server:
 
 1. GET `/`
@@ -177,5 +177,5 @@ retrieve the link for the server:
 
 The response has a 204 NO CONTENT status code.
 
-Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/` link. That's it!
+Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/self` link. That's it!
 
