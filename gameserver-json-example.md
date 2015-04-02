@@ -44,6 +44,7 @@ OR expanded:
    "http://example.org/rels/server": [
       {
         "http://json-hc.org/rels/self": "http://example.org/servers/1338",
+        "http://json-hc.org/rels/profile": "http://example.org/rels/server",
         "name": "My Gameserver",
         "is_running": true,
         "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -59,6 +60,7 @@ A stopped server:
 ``` json
 {
   "http://json-hc.org/rels/self": "http://example.org/servers/1338",
+  "http://json-hc.org/rels/profile": "http://example.org/rels/server",
   "name": "My Gameserver",
   "is_running": false,
   "http://example.org/rels/start": "http://example.org/started-servers?id=1338"
@@ -70,6 +72,7 @@ A started server:
 ``` json
 {
   "http://json-hc.org/rels/self": "http://example.org/servers/1338",
+  "http://json-hc.org/rels/profile": "http://example.org/rels/server",
   "name": "My Gameserver",
   "is_running": true,
   "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -112,6 +115,7 @@ Otherwise (with 400 status code):
 ``` json
 {
   "http://json-hc.org/rels/self": "http://example.org/servers/1338/log/1573923",
+  "http://json-hc.org/rels/profile": "http://example.org/rels/log-entry",
   "message": "Server started",
   "date": "2000-01-01T13:37:55Z"
 }
