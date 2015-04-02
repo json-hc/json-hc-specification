@@ -28,9 +28,9 @@ My general assumptions are:
 From ReST we take this:
 
 * No hardcoded links in client software: We shall be able to change the host for the avatar image, so client's should not construct the avatar image url by string concatination
-  * See section: Links are json properties uris on their own or suffixed with `_link`
+  * See section: Links are json properties uris on their own or prefixed with `http://json-hc.org/rels/`
 
-### Links are json properties uris on their own or suffixed with `_link`
+### Links are json properties uris on their own or prefixed with `http://json-hc.org/rels/`
 
 What happens if you step one big step away from the most current hypermedia specs (like HAL+CollectionJSON): why an extra object for links?
 
@@ -63,7 +63,7 @@ or as this:
 ``` json
 {
   "id": 1338,
-  "self_link": "http://example.org/articles/1338",
+  "http://json-hc.org/rels/self": "http://example.org/articles/1338",
   "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
   "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
 }
@@ -94,7 +94,7 @@ would be written as this:
 
 ``` json
 {
-  "self_link": "http://example.org/latest-articles",
+  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
   "http://example.org/rels/article": [
     "http://example.org/articles/1338",
     "http://example.org/articles/1336",
@@ -107,7 +107,7 @@ So if we have no articles:
 
 ``` json
 {
-  "self_link": "http://example.org/latest-articles",
+  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
   "http://example.org/rels/article": []
 }
 ```
@@ -145,11 +145,11 @@ But with this media type, a link can be included by including the response:
 
 ``` json
 {
-  "self_link": "http://example.org/latest-articles",
+  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
   "http://example.org/rels/article": [
     {
       "id": 1338,
-      "self_link": "http://example.org/articles/1338",
+      "http://json-hc.org/rels/self": "http://example.org/articles/1338",
       "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
       "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
     },
