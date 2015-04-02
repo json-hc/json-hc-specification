@@ -3,7 +3,7 @@
 * Author: [DracoBlue](http://dracoblue.net)
 * Status: I am working on this. No final version, yet!
 
-This is an example for [minimalistic-json-media-type.md](./minimalistic-json-media-type.md).
+This is an example for [json-hc.md](./json-hc.md).
 
 Let's say we own a game hosting service, and want to start and stop game servers. Additionally it should be possible to set server name of the server.
 
@@ -29,7 +29,7 @@ Not expanded:
 
 ``` json
 {
-   "next_link": "http://example.org/servers?page=2",
+   "http://json-hc.org/rels/next": "http://example.org/servers?page=2",
    "http://example.org/rels/server": [
       "http://example.org/servers/1338"
    ]
@@ -40,10 +40,10 @@ OR expanded:
 
 ``` json
 {
-   "next_link": "http://example.org/servers?page=2",
+   "http://json-hc.org/rels/next": "http://example.org/servers?page=2",
    "http://example.org/rels/server": [
       {
-        "self_link": "http://example.org/servers/1338",
+        "http://json-hc.org/rels/self": "http://example.org/servers/1338",
         "name": "My Gameserver",
         "is_running": true,
         "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -58,7 +58,7 @@ A stopped server:
 
 ``` json
 {
-  "self_link": "http://example.org/servers/1338",
+  "http://json-hc.org/rels/self": "http://example.org/servers/1338",
   "name": "My Gameserver",
   "is_running": false,
   "http://example.org/rels/start": "http://example.org/started-servers?id=1338"
@@ -69,7 +69,7 @@ A started server:
 
 ``` json
 {
-  "self_link": "http://example.org/servers/1338",
+  "http://json-hc.org/rels/self": "http://example.org/servers/1338",
   "name": "My Gameserver",
   "is_running": true,
   "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -103,7 +103,7 @@ Otherwise (with 400 status code):
 
 ``` json
 {
-  "self_link": "http://example.org/servers/1338/log/1573923",
+  "http://json-hc.org/rels/self": "http://example.org/servers/1338/log/1573923",
   "message": "Server started",
   "date": "2000-01-01T13:37:55Z"
 }
@@ -163,7 +163,7 @@ If the `server` object contains a self link + etag, make a conditional PATCH req
 
 The response has a 204 NO CONTENT status code.
 
-Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
+Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/self` link. That's it!
 
 #### no self link in the server object
 
@@ -173,9 +173,9 @@ retrieve the link for the server:
 1. GET `/`
 2. GET link: `http://example.org/rels/servers` with GET parameter `id=1338` (if `server.id` is 1338).
 3. GET first link: `http://example.org/rels/server`
-4. PATCH link: `self` with body: `name=My%20New%20Server`
+4. PATCH link: `http://json-hc.org/rels/self` with body: `name=My%20New%20Server`
 
 The response has a 204 NO CONTENT status code.
 
-Afterwards retrieve a fresh new copy of server with GET for the self_link. That's it!
+Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/` link. That's it!
 
