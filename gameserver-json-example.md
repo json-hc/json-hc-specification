@@ -81,6 +81,7 @@ A started server:
 
 ### `PATCH /servers/1338` to set a new name
 
+`Content-Type: application/json-patch+json`
 ``` json
 [
     { "op": "replace", "path": "/name", "value": "My New Gameserver" }
@@ -173,6 +174,7 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 
 If the `server` object contains a `http://json-hc.org/rels/self` link + etag, make a conditional PATCH request with body:
 
+`Content-Type: application/json-patch+json``
 ``` json
 [
     { "op": "replace", "path": "/name", "value": "My New Gameserver" }
@@ -198,6 +200,8 @@ retrieve the link for the server:
     { "op": "replace", "path": "/name", "value": "My New Gameserver" }
 ]
 ``` 
+and header
+`Content-Type: application/json-patch+json`
 
 
 The response has a 204 NO CONTENT status code.
