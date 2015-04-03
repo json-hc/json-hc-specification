@@ -158,3 +158,9 @@ But with this media type, a link can be included by including the response:
   ]
 }
 ```
+
+## References
+
+* Use JSON PATCH ([rfc6902](https://tools.ietf.org/html/rfc6902)) with JSON Pointers ([rfc6901](https://tools.ietf.org/html/rfc6901)) for partial updates
+* Use Profile Link Relation ([rfc6906](https://tools.ietf.org/html/rfc6906)) to define the "type" or "profile" of an resource representation
+* Use Prefer-Header ([rfc7240](http://tools.ietf.org/html/rfc7240)) for "respond-async", "return=representation", "return=minimal" and "wait"
