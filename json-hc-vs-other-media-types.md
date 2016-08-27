@@ -47,9 +47,9 @@ would be written as this:
 ``` json
 {
   "id": 1338,
-  "self_link": "http://example.org/articles/1338",
-  "publish_link": "http://example.org/published-articles?id=1338",
-  "avatar_link": "http//cdn.example.org/23051985.png"
+  "self": "http://example.org/articles/1338",
+  "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
+  "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
 }
 ```
 
@@ -89,7 +89,7 @@ would be written as this:
 
 ``` json
 {
-  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
+  "self": "http://example.org/latest-articles",
   "http://example.org/rels/article": [
     "http://example.org/articles/1338",
     "http://example.org/articles/1336",
@@ -140,11 +140,11 @@ But with this media type, a link can be included by including the response:
 
 ``` json
 {
-  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
+  "self": "http://example.org/latest-articles",
   "http://example.org/rels/article": [
     {
       "id": 1338,
-      "http://json-hc.org/rels/self": "http://example.org/articles/1338",
+      "self": "http://example.org/articles/1338",
       "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
       "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
     },
