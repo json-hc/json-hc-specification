@@ -37,7 +37,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # JSON-HC Documents
 
-A JSON-HC Document uses the format described in [@RFC4627] and has the media type "application/hc+json".
+A JSON-HC Document uses the format described in [@RFC4627] and has the media type "application/vnd.hc+json".
 
 Its root object MUST be a Resource Object.
 
@@ -45,10 +45,10 @@ For example:
 
     GET /orders/523 HTTP/1.1
     Host: example.org
-    Accept: application/hc+json
+    Accept: application/vnd.hc+json
 
     HTTP/1.1 200 OK
-    Content-Type: application/hc+json
+    Content-Type: application/vnd.hc+json
 
     {
       "self": "/orders/523",
@@ -128,10 +128,10 @@ The following order resource has a self Hypermedia Control as defined by IANA Li
 
     GET /orders/523 HTTP/1.1
     Host: example.org
-    Accept: application/hc+json
+    Accept: application/vnd.hc+json
 
     HTTP/1.1 200 OK
-    Content-Type: application/hc+json
+    Content-Type: application/vnd.hc+json
 
     {
       "self": "/orders/523",
