@@ -1,167 +1,158 @@
+% title = "JSON-HC"
+% abbrev = "JSON-HC"
+% category = "info"
+% docName = "draft-schuetze-json-hc-01"
+% date = 2016-08-27T00:00:00Z
+% area = "Application"
+% workgroup = "Network Working Group"
+% keyword = ["JSON"]
+%
+% [[author]]
+% initials = "J."
+% surname  = "Schuetze"
+% fullname = "J. Schuetze"
+%   [author.address]
+%   email = "jans@dracoblue.de"
+
+.# Preface
+
+This document proposes a media type for representing JSON resources and relations with hypermedia controls.
+
+{mainmatter}
+
+{.title}
 # JSON-HC
+{.title}
 
-A minimalistic JSON media type, which enables hypermedia controls in JSON.
+# Introduction
 
-* Author: [DracoBlue](http://dracoblue.net)
-* Status: I am working on this. No final version, yet!
+JSON Hypermedia Controls (JSON-HC) is a standard which
+establishes conventions for expressing hypermedia controls in JSON [@RFC4627].
 
-## Basic idea
+The Hypermedia Controls of JSON-HC provide a way to figure out which Actions are possible with a Resource Object, what is the self URL of the Object and of which profile is the Resource Object.
 
-This media type is an effort to write a json media type ([RMM Level 3](http://martinfowler.com/articles/richardsonMaturityModel.html) with [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS)), which is easy to implement if you OWN the server and the client (sdk)!
+# Requirements
 
-To understand the idea, please see the example for controlling gameservers in [gameserver-json-example.md](gameserver-json-example.md), before you read the other sections!
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and OPTIONAL" in this document are to be interpreted as described in [@RFC2119].
 
-## Why yet another media type?
+# JSON-HC Documents
 
-Recently [@mca](https://github.com/mamund) posted [uber hypermedia spec](https://rawgithub.com/mamund/media-types/master/uber-hypermedia.html) and I noticed all those 'data' elements in there. This is necessary, because you don't want to mix links with data entities. In HAL/Siren there is a special `_links`/`links` object, which holds all links. In [json-ld](http://json-ld.org) there is a specific `@context` to explain what the plain json attributes **mean** in terms of linked data.
+A JSON-HC Document uses the format described in [@RFC4627] and has the media type "application/hc+json".
 
-But this mixing should not a problem, if you OWN server and client. This idea should evolve to a guide, how to write APIs for clients - once it works for server+client developments.
+Its root object MUST be a Resource Object.
 
-## Writing API for YOUR Server and YOUR Client (SDK)
+For example:
 
-My general assumptions are:
+    GET /orders/523 HTTP/1.1
+    Host: example.org
+    Accept: application/hc+json
 
-- you usually (have to) know the cardinality of a specific relation when developing a client app (there is ONE self link, ONE publish link, NONE or MORE item links in a collection)
-- you usually don't need a title for links
-- usually you hardcode the verb for your links into your app (e.g. you DELETE to the self link and react if its not possible), so information which verb is possible is not necessary or at least not visible, yet
+    HTTP/1.1 200 OK
+    Content-Type: application/hc+json
 
-From ReST we take this:
-
-* No hardcoded links in client software: We shall be able to change the host for the avatar image, so client's should not construct the avatar image url by string concatination
-  * See section: Links are json properties uris on their own or prefixed with `http://json-hc.org/rels/`
-
-### Links are json properties uris on their own or prefixed with `http://json-hc.org/rels/`
-
-What happens if you step one big step away from the most current hypermedia specs (like HAL+CollectionJSON): why an extra object for links?
-
-What if this HAL document:
-
-``` json
-{
-  "_links": {
-    "self": "http://example.org/articles/1338",
-    "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
-    "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
-  },
-  "id": 1338
-}
-```
-
-would be written as this:
-
-``` json
-{
-  "id": 1338,
-  "self_link": "http://example.org/articles/1338",
-  "publish_link": "http://example.org/published-articles?id=1338",
-  "avatar_link": "http//cdn.example.org/23051985.png"
-}
-```
-
-or as this:
-
-``` json
-{
-  "id": 1338,
-  "http://json-hc.org/rels/self": "http://example.org/articles/1338",
-  "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
-  "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
-}
-```
-
-So one cool thing what is cool about ReST and hypermedia stays in tact: no hard coded urls in the client.
-
-You cannot set a `title` or `type` for the `rel` anymore, but nothing else is lost. If we control the client sdk, this might not be necessary.
-
-### If a link may appear multiple times, it is always an array
-
-The HAL document:
-
-``` json
-{
-  "_links": {
-    "self": "http://example.org/latest-articles",
-    "http://example.org/rels/article": [
-      "http://example.org/articles/1338",
-      "http://example.org/articles/1336",
-      "http://example.org/articles/1333"
-    ]
-  }
-}
-```
-
-would be written as this:
-
-``` json
-{
-  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
-  "http://example.org/rels/article": [
-    "http://example.org/articles/1338",
-    "http://example.org/articles/1336",
-    "http://example.org/articles/1333"
-  ]
-}
-```
-
-So if we have no articles:
-
-``` json
-{
-  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
-  "http://example.org/rels/article": []
-}
-```
-
-### Embedded resources are links, which are resolved
-
-If we want to embed a ressource in HAL, we have to do it in this way:
-
-``` json
-{
-  "_links": {
-    "self": "http://example.org/latest-articles",
-    "http://example.org/rels/article": [
-      "http://example.org/articles/1338",
-      "http://example.org/articles/1336",
-      "http://example.org/articles/1333"
-    ]
-  },
-  "_embedded": {
-    "http://example.org/rels/article": [
-      {
-        "_links": {
-          "self": "http://example.org/articles/1338",
-          "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
-          "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
-        },
-        "id": 1338
-      }
-    ]
-  }
-}
-```
-
-But with this media type, a link can be included by including the response:
-
-``` json
-{
-  "http://json-hc.org/rels/self": "http://example.org/latest-articles",
-  "http://example.org/rels/article": [
     {
-      "id": 1338,
-      "http://json-hc.org/rels/self": "http://example.org/articles/1338",
-      "http://example.org/rels/publish": "http://example.org/published-articles?id=1338",
-      "http://example.org/rels/avatar": "http//cdn.example.org/23051985.png"
-    },
-    "http://example.org/articles/1336",
-    "http://example.org/articles/1333"
-  ]
-}
-```
+      "self": "/orders/523",
+      "profile": "https://example.org/rels/order",
+      "https://example.org/rels/warehouse": "/warehouse/56",
+      "https://example.org/rels/invoice": "/invoices/873",
+      "currency": "USD",
+      "status": "shipped",
+      "total": 10.20
+    }
 
-## References
 
-* Use JSON PATCH ([rfc6902](https://tools.ietf.org/html/rfc6902)) with JSON Pointers ([rfc6901](https://tools.ietf.org/html/rfc6901)) for partial updates
-* Use Profile Link Relation ([rfc6906](https://tools.ietf.org/html/rfc6906)) to define the "type" or "profile" of an resource representation
-* Use Prefer-Header ([rfc7240](http://tools.ietf.org/html/rfc7240)) for "respond-async", "return=representation", "return=minimal" and "wait"
-* Evaluate if URI Template ([rfc6570](http://tools.ietf.org/html/rfc6570)) is a good idea in this media type
+Here, we have a JSON-HC document representing an order resource with the URI "/orders/523" and the profile as in [@RFC6906] defined as `"https://example.org/rels/order"`. It has "warehouse" and "invoice" links, and its own state in the form of "currency", "status", and "total" properties.
+
+# Resource Objects
+
+A Resource Objects represents a resource.
+
+It has no reserved properties.
+
+A Resource Object **MAY** contain Hypermedia Controls with either a Target URL or an Embedded Resource Object as a value.
+
+# Hypermedia Controls
+
+Resource Objects **MAY** contain Hypermedia Controls.
+
+A Hypermedia Control is a property name, which is either:
+
+* an IANA link relation name
+* or a valid URI
+
+The value of this Hypermedia Control must be an URL to the linked resource or an Embedded Resource Object.
+
+If the value is an URL, the Resource Object needs to be fetched ondemand with an additional request.
+
+# Embedded Resource Object
+
+If the value of an Hypermedia Control is a JSON object, there is no additional request necessary to fetch the Resource Object for this Hypermedia Control.
+
+# Refresh a Resource Object
+
+If the Resource Object has a "self" Hypermedia Control, the value MUST be an URL. A request to the URL will provide the Resource Object.
+
+# Target URL
+
+The target URL of an Hypermedia Control is either:
+
+* the value of an Hypermedia Control, if it is an URL
+* the "self" Hypermedia Control of the Embedded Resource Object
+
+If the Target URL is not an absolute URL, it must start with a "/" and any request to this Target URL will be preceded with the base path of the initially requested Document.
+
+# Performing Actions
+
+The Target URL of an Hypermedia Control can be used as target for HTTP requests.
+
+# Retrieve available HTTP methods
+
+JSON-HC does not provide an own way to define, which HTTP methods a JSON-HC Target URL may accept.
+
+If a server needs to list the possible HTTP methods available for a resource, it **SHOULD** provide an Allow Header [@RFC7231].
+
+    OPTIONS /cancelation/123 HTTP/1.1
+
+    HTTP/1.1 204 No Content
+    Allow: POST, OPTIONS
+
+If the resource was requested with an unsupported method, the server should reply with *405 Method not Allowed* HTTP Status Code.
+
+# Profile of a Resource Object
+
+If the Resource Object has a profile Hypermedia Control, a client can use this to figure out of which kind the Resource Object is.
+
+# Examples
+
+The following order resource has a self Hypermedia Control as defined by IANA Link Relations and a custom cancel Hypermedia Control.
+
+    GET /orders/523 HTTP/1.1
+    Host: example.org
+    Accept: application/hc+json
+
+    HTTP/1.1 200 OK
+    Content-Type: application/hc+json
+
+    {
+      "self": "/orders/523",
+      "profile": "https://example.org/rels/order",
+      "https://example.org/rels/cancel": "/cancelation/873",
+      "currency": "USD",
+      "status": "created",
+      "total": 10.20
+    }
+
+If the client wants to cancel the order, it does a POST HTTP Request to the cancel Hypermedia Control.
+
+    POST /cancelation/123 HTTP/1.1
+
+    HTTP/1.1 204 No Content
+
+If POST would be not available, the server responds with:
+
+    HTTP/1.1 405 Method Not Allowed
+    Allow: DELETE
+
+A client might decide to use DELETE method instead of the hard coded POST method instead.
+
+{backmatter}
