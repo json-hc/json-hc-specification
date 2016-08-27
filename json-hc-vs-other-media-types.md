@@ -1,13 +1,8 @@
-# JSON-HC
-
-A minimalistic JSON media type, which enables hypermedia controls in JSON.
-
-* Author: [DracoBlue](http://dracoblue.net)
-* Status: I am working on this. No final version, yet!
+# JSON-HC vs other media types
 
 ## Basic idea
 
-This media type is an effort to write a json media type ([RMM Level 3](http://martinfowler.com/articles/richardsonMaturityModel.html) with [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS)), which is easy to implement if you OWN the server and the client (sdk)!
+The JSON-HC media type is an effort to write a json media type ([RMM Level 3](http://martinfowler.com/articles/richardsonMaturityModel.html) with [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS)), which is easy to implement if you OWN the server and the client (sdk)!
 
 To understand the idea, please see the example for controlling gameservers in [gameserver-json-example.md](gameserver-json-example.md), before you read the other sections!
 
