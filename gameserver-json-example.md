@@ -29,7 +29,7 @@ Not expanded:
 
 ``` json
 {
-   "http://json-hc.org/rels/next": "http://example.org/servers?page=2",
+   "next": "http://example.org/servers?page=2",
    "http://example.org/rels/server": [
       "http://example.org/servers/1338"
    ]
@@ -40,11 +40,11 @@ OR expanded:
 
 ``` json
 {
-   "http://json-hc.org/rels/next": "http://example.org/servers?page=2",
+   "next": "http://example.org/servers?page=2",
    "http://example.org/rels/server": [
       {
-        "http://json-hc.org/rels/self": "http://example.org/servers/1338",
-        "http://json-hc.org/rels/profile": "http://example.org/rels/server",
+        "self": "http://example.org/servers/1338",
+        "profile": "http://example.org/rels/server",
         "name": "My Gameserver",
         "is_running": true,
         "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -59,8 +59,8 @@ A stopped server:
 
 ``` json
 {
-  "http://json-hc.org/rels/self": "http://example.org/servers/1338",
-  "http://json-hc.org/rels/profile": "http://example.org/rels/server",
+  "self": "http://example.org/servers/1338",
+  "profile": "http://example.org/rels/server",
   "name": "My Gameserver",
   "is_running": false,
   "http://example.org/rels/start": "http://example.org/started-servers?id=1338"
@@ -71,8 +71,8 @@ A started server:
 
 ``` json
 {
-  "http://json-hc.org/rels/self": "http://example.org/servers/1338",
-  "http://json-hc.org/rels/profile": "http://example.org/rels/server",
+  "self": "http://example.org/servers/1338",
+  "profile": "http://example.org/rels/server",
   "name": "My Gameserver",
   "is_running": true,
   "http://example.org/rels/stop": "http://example.org/stopped-servers?id=1338"
@@ -115,8 +115,8 @@ Otherwise (with 400 status code):
 
 ``` json
 {
-  "http://json-hc.org/rels/self": "http://example.org/servers/1338/log/1573923",
-  "http://json-hc.org/rels/profile": "http://example.org/rels/log-entry",
+  "self": "http://example.org/servers/1338/log/1573923",
+  "profile": "http://example.org/rels/log-entry",
   "message": "Server started",
   "date": "2000-01-01T13:37:55Z"
 }
@@ -172,7 +172,7 @@ The response is a 201 redirect to a log entry and will be returned as LogEntry.
 
 #### self link in the server object
 
-If the `server` object contains a `http://json-hc.org/rels/self` link + etag, make a conditional PATCH request with body:
+If the `server` object contains a `self` link + etag, make a conditional PATCH request with body:
 
 `Content-Type: application/json-patch+json``
 ``` json
@@ -183,17 +183,17 @@ If the `server` object contains a `http://json-hc.org/rels/self` link + etag, ma
 
 The response has a 204 NO CONTENT status code.
 
-Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/self` link. That's it!
+Afterwards retrieve a fresh new copy of server with GET for the `self` link. That's it!
 
 #### no self link in the server object
 
-If the `server` object does not contain a `http://json-hc.org/rels/self` link
+If the `server` object does not contain a `self` link
 retrieve the link for the server:
 
 1. GET `/`
 2. GET link: `http://example.org/rels/servers` with GET parameter `id=1338` (if `server.id` is 1338).
 3. GET first link: `http://example.org/rels/server`
-4. PATCH link: `http://json-hc.org/rels/self` with body:
+4. PATCH link: `self` with body:
 
 ``` json
 [
@@ -206,5 +206,5 @@ and header
 
 The response has a 204 NO CONTENT status code.
 
-Afterwards retrieve a fresh new copy of server with GET for the `http://json-hc.org/rels/self` link. That's it!
+Afterwards retrieve a fresh new copy of server with GET for the `self` link. That's it!
 
