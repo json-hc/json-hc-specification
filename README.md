@@ -8,6 +8,8 @@ once in a while.
 
 If you want to compare json-hc to [mike kelly's](https://github.com/mikekelly/) awesome [hal](stateless.co/hal_specification.html), I created a document called [json-hc-vs-hal.md](./json-hc-vs-hal.md).
 
+There is also an example api built with json-hc, which describes a game server api at [gameserver-json-example.md](./gameserver-json-example.md).
+
 The official site of json-hc is <https://json-hc.org>. The maintainer and creator is [dracoblue](https://dracoblue.net).
 
 ## Tooling for the Internet Draft
