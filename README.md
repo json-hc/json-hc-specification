@@ -6,7 +6,7 @@ specification, send a pull request to this repository.
 The latest version is available in [json-hc.md](./json-hc.md) and will be published to <https://tools.ietf.org/html/draft-schuetze-json-hc>
 once in a while.
 
-If you want to compare json-hc to [mike kelly's](https://github.com/mikekelly/) awesome [hal](stateless.co/hal_specification.html), I created a document called [json-hc-vs-hal.md](./json-hc-vs-hal.md).
+If you want to compare json-hc to [mike kelly's](https://github.com/mikekelly/) awesome [hal](stateless.co/hal_specification.html) or collection+json, I created a document called [json-hc-vs-other-media-types.md](./json-hc-vs-other-media-types.md).
 
 There is also an example api built with json-hc, which describes a game server api at [gameserver-json-example.md](./gameserver-json-example.md).
 
