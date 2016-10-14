@@ -1,0 +1,12 @@
+<reference anchor="CORS" target="http://www.w3.org/TR/2010/WD-cors-20100727/">
+    <front>
+        <title>Cross-Origin Resource Sharing</title>
+        <author fullname="Anne van Kesteren" surname="van Kesteren" initials="A."/>
+        <date year='2010' month='July' day='27'/>
+    </front>
+    <seriesInfo name="W3C Working Draft" value="WD-cors-20100727"/>
+    <annotation>
+        Latest version available at
+        <eref target="http://www.w3.org/TR/cors/"/>.
+    </annotation>
+</reference>

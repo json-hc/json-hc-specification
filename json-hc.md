@@ -1,8 +1,8 @@
 % title = "JSON-HC"
 % abbrev = "JSON-HC"
 % category = "info"
-% docName = "draft-schuetze-json-hc-01"
-% date = 2016-08-27T00:00:00Z
+% docName = "draft-schuetze-json-hc-02"
+% date = 2016-10-14T21:03:00Z
 % area = "Application"
 % workgroup = "Network Working Group"
 % keyword = ["JSON"]
@@ -20,14 +20,10 @@ This document proposes a media type for representing JSON resources and relation
 
 {mainmatter}
 
-{.title}
-# JSON-HC
-{.title}
-
 # Introduction
 
 JSON Hypermedia Controls (JSON-HC) is a standard which
-establishes conventions for expressing hypermedia controls in JSON [@RFC4627].
+establishes conventions for expressing hypermedia controls in JSON [@RFC7159].
 
 The Hypermedia Controls of JSON-HC provide a way to figure out which Actions are possible with a Resource Object, what is the self URL of the Object and of which profile is the Resource Object.
 
@@ -37,7 +33,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # JSON-HC Documents
 
-A JSON-HC Document uses the format described in [@RFC4627] and has the media type "application/vnd.hc+json".
+A JSON-HC Document uses the format described in [@RFC7159] and has the media type "application/vnd.hc+json".
 
 Its root object MUST be a Resource Object.
 
@@ -154,5 +150,18 @@ If POST would be not available, the server responds with:
     Allow: DELETE
 
 A client might decide to use DELETE method instead of the hard coded POST method instead.
+
+# Security Considerations
+
+Since JSON-HC documents are JSON documents, they inherit all security considerations of RFC 7159 [@RFC7159].
+
+The linking part of the JSON-HC media type is not known to introduce any new security issues not already discussed in
+RFC 5988 [@RFC5988] for generic use of web linking mechanisms.
+
+The JSON-HC documents follow the Web Origin Concept of RFC 6454 [@RFC6454] and by default only allow access to documents
+of the same origin. Network resources can also opt into letting other origins read their information, for example, using
+Cross-Origin Resource Sharing [@CORS].
+
+{{json-hc.bib.xml}}
 
 {backmatter}
