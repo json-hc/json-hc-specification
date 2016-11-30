@@ -158,9 +158,18 @@ Since JSON-HC documents are JSON documents, they inherit all security considerat
 The linking part of the JSON-HC media type is not known to introduce any new security issues not already discussed in
 RFC 5988 [@RFC5988] for generic use of web linking mechanisms.
 
-The JSON-HC documents follow the Web Origin Concept of RFC 6454 [@RFC6454] and by default only allow access to documents
-of the same origin. Network resources can also opt into letting other origins read their information, for example, using
-Cross-Origin Resource Sharing [@CORS].
+The JSON-HC documents follow the Web Origin Concept of RFC 6454 [@RFC6454] and by default only following hypermedia
+controls to documents of the same origin are allowed. Network resources can also opt into letting other origins read
+their information, for example, using Cross-Origin Resource Sharing [@CORS].
+
+# Privacy Considerations
+
+Since JSON-HC documents are JSON documents, they also inherit all privacy considerations of RFC 7159 [@RFC7159]. Thus
+the security goals like defined in RFC 6973 [@RFC6973]: Confidentiality, Peer entity authentication, Unauthorized usage
+and Inappropriate usage need to be handled outside of the JSON-HC documents and are out of scope of this specification.
+
+For example JSON Web Tokens [@RFC7519] or OAuth 2.0 [@RFC6749] can be used alongside of JSON-HC to ensure authentication
+and deny unauthorized usages and HTTPS [@RFC2818] can be used to ensure confidentiality.
 
 {{json-hc.bib.xml}}
 
