@@ -1,8 +1,8 @@
 % title = "JSON-HC"
 % abbrev = "JSON-HC"
 % category = "info"
-% docName = "draft-schuetze-json-hc-02"
-% date = 2016-10-14T21:03:00Z
+% docName = "draft-schuetze-json-hc-03"
+% date = 2016-11-30T13:11:00Z
 % area = "Application"
 % workgroup = "Network Working Group"
 % keyword = ["JSON"]
